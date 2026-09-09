@@ -1,0 +1,315 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Rajdhani:wght@500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Orbitron", ui-sans-serif, system-ui, sans-serif;
+  --font-tech: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-body: "Rajdhani", ui-sans-serif, sans-serif;
+
+  /* Holographic Surface Tones */
+  --color-holo-void: #020410;
+  --color-holo-abyss: #050a25;
+  --color-holo-deep: #0a1133;
+  --color-holo-panel: #0d1645;
+
+  /* Hologram Light Spectrum */
+  --color-holo-cyan: #4ad8ff;
+  --color-holo-azure: #2890ff;
+  --color-holo-violet: #9d6bff;
+  --color-holo-magenta: #ff5cf3;
+  --color-holo-lumen: #ffffff;
+  --color-holo-amber: #ffb84a;
+
+  /* Semantic text ramp */
+  --color-ink: #ffffff;
+  --color-ink-1: #e8eeff;
+  --color-ink-2: #cad6f2;
+  --color-ink-3: #98a5c4;
+  --color-ink-4: #6c7a9a;
+  --color-ink-5: #424c6c;
+  --color-ink-6: #252e4a;
+
+  --animate-spin-slower: spin-slower 24s linear infinite;
+  --animate-spin-slow: spin-slow 14s linear infinite;
+
+  @keyframes spin-slower {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes spin-slow {
+    to { transform: rotate(360deg); }
+  }
+}
+
+:root {
+  --mx: 0;
+  --my: 0;
+  --perspective: 1400px;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #020410;
+}
+
+body {
+  background: var(--color-holo-void);
+  color: var(--color-ink-2);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* Holo Custom Cursor (Floating Reticle) */
+html.has-holo-cursor,
+html.has-holo-cursor a,
+html.has-holo-cursor button,
+html.has-holo-cursor [role="button"] {
+  cursor: none;
+}
+html.has-holo-cursor input,
+html.has-holo-cursor textarea {
+  cursor: text;
+}
+
+::selection {
+  background: rgba(74, 216, 255, 0.3);
+  color: #ffffff;
+  text-shadow: 0 0 8px #4ad8ff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #020418;
+  border-left: 1px solid rgba(74, 216, 255, 0.15);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #4ad8ff, #9d6bff);
+  border-radius: 99px;
+  box-shadow: 0 0 10px rgba(74, 216, 255, 0.5);
+}
+
+/* ========================================================= */
+/*  HOLOGRAPHIC TYPOGRAPHY                                   */
+/* ========================================================= */
+.holo-text {
+  font-family: var(--font-display);
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #caefff 25%,
+    #4ad8ff 50%,
+    #2890ff 75%,
+    #5b1a9e 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-transform: uppercase;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 22px rgba(74, 216, 255, 0.45));
+}
+
+.cyan-glow {
+  color: #4ad8ff;
+  text-shadow: 0 0 10px rgba(74, 216, 255, 0.9), 0 0 25px rgba(74, 216, 255, 0.4);
+}
+
+.violet-glow {
+  color: #c9a3ff;
+  text-shadow: 0 0 10px rgba(157, 107, 255, 0.8), 0 0 25px rgba(157, 107, 255, 0.4);
+}
+
+/* ========================================================= */
+/*  LAYERED HOLOGRAPHIC PANEL                                */
+/* ========================================================= */
+.holo-panel {
+  background:
+    linear-gradient(135deg, rgba(74, 216, 255, 0.04) 0%, rgba(10, 17, 51, 0.6) 50%, rgba(157, 107, 255, 0.04) 100%);
+  border: 1px solid rgba(74, 216, 255, 0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -10px 20px rgba(0, 0, 0, 0.4),
+    0 15px 35px rgba(0, 0, 0, 0.6),
+    0 0 18px rgba(74, 216, 255, 0.15);
+  position: relative;
+  backdrop-filter: blur(8px);
+}
+
+.holo-panel-deep {
+  background: linear-gradient(180deg, rgba(5, 10, 37, 0.85) 0%, rgba(2, 4, 16, 0.95) 100%);
+  border: 1px solid rgba(74, 216, 255, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Hologram Brackets Frame (Top & Bottom Corners) */
+.bracket-frame {
+  position: relative;
+}
+.bracket-frame::before,
+.bracket-frame::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: #4ad8ff;
+  border-style: solid;
+  border-width: 0;
+  pointer-events: none;
+}
+.bracket-frame::before {
+  top: 0;
+  left: 0;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+.bracket-frame::after {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+/* ========================================================= */
+/*  3D PERSPECTIVE & DEPTH TRANSITIONS                        */
+/* ========================================================= */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.depth-card {
+  transform-style: preserve-3d;
+  transition:
+    transform 0.6s cubic-bezier(0.2, 0.8, 0.3, 1),
+    box-shadow 0.6s ease,
+    border-color 0.6s ease;
+  will-change: transform;
+}
+
+/* Inner layer offset for multi-layer holographic cards */
+.holo-card-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(74, 216, 255, 0.06), rgba(157, 107, 255, 0.06));
+  border: 1px solid rgba(74, 216, 255, 0.25);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.3, 1);
+  pointer-events: none;
+}
+.holo-card-layer-2 {
+  transform: translate3d(10px, 10px, -20px);
+  opacity: 0.4;
+}
+.holo-card-layer-3 {
+  transform: translate3d(20px, 20px, -40px);
+  opacity: 0.2;
+}
+
+/* ========================================================= */
+/*  SCANLINES, GLITCH & FADE-IN                              */
+/* ========================================================= */
+@keyframes scanline-drift {
+  0% { transform: translateY(-110%); }
+  100% { transform: translateY(110%); }
+}
+.scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, rgba(74, 216, 255, 0.6), transparent);
+  animation: scanline-drift 5s linear infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+@keyframes hologram-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.96; }
+  75% { opacity: 0.93; }
+}
+.hologram-flicker {
+  animation: hologram-flicker 0.15s infinite;
+}
+
+/* Magma/Heat sheen sweep — used by Contact sections */
+@keyframes sheen-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(150%); }
+}
+.magma-sheen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 35%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(74, 216, 255, 0.1) 50%,
+    transparent 100%
+  );
+  animation: sheen-sweep 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes depth-emerge {
+  from {
+    opacity: 0;
+    transform: translateZ(-160px) scale(0.85) rotateX(8deg);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0) scale(1) rotateX(0);
+    filter: blur(0);
+  }
+}
+.depth-emerge {
+  animation: depth-emerge 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(-6px); }
+  50% { transform: translateY(6px); }
+}
+.anim-float {
+  animation: float-y 7s ease-in-out infinite;
+}
+
+/* ========================================================= */
+/*  HOLOGRAM MOIRE / DISTORTION                              */
+/* ========================================================= */
+.moire-overlay {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(74, 216, 255, 0.04) 0px,
+    rgba(74, 216, 255, 0.04) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  pointer-events: none;
+}
+
+.fx-vignette {
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    transparent 40%,
+    rgba(2, 4, 16, 0.75) 75%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+}
+
+.fx-grain {
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ========================================================= */
+/*  PRINTER / EXPORT DECK                                    */
+/* ========================================================= */
+@media print {
+  .app-shell { display: none !important; }
+  #omni-dossier { display: block !important; }
+}
